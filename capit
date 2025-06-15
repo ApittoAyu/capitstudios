@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPIT Studio - Creative Awesome Pro Interactive Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #2f3542;
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(255, 107, 107, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(255, 107, 107, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #4834d4;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: -5px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #2f3542;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: #ff6b6b;
+            transform: translateY(-2px);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ff6b6b;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ff6b6b 0%, #4834d4 50%, #00d2d3 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-10px, -10px) rotate(1deg); }
+            50% { transform: translate(10px, -20px) rotate(-1deg); }
+            75% { transform: translate(-20px, 10px) rotate(1deg); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #ff6b6b;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #ff6b6b;
+        }
+        
+        /* Video Showcase */
+        .video-showcase {
+            background: #2f3542;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .showcase-video {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            background: linear-gradient(45deg, #ff6b6b, #4834d4);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase-video::before {
+            content: 'Video Compilation Coming Soon';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2f3542;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Featured Tutorials */
+        .featured {
+            background: #f8f9fa;
+        }
+        
+        .tutorials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .tutorial-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tutorial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.2);
+        }
+  
+        .tutorial-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .tutorial-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            color: #ff6b6b;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tutorial-content {
+            padding: 2rem;
+        }
+        
+        .tutorial-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2f3542;
+            font-weight: 600;
+        }
+        
+        .tutorial-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tutorial-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* About Creator */
+        .about-creator {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+            color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .creator-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #00d2d3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+            border: 5px solid rgba(255,255,255,0.3);
+            position: relative;
+        }
+        
+        .creator-image::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #00d2d3, #4834d4);
+            z-index: -1;
+            animation: rotate 8s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Learning Categories */
+        .learning-categories {
+            background: #f8f9fa;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .category-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4834d4, #00d2d3);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .category-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .category-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2f3542;
+            font-weight: 600;
+        }
+        
+        .category-card p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .category-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        /* Community Section */
+        .community {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+            color: white;
+        }
+        
+        .community-content {
+            text-align: center;
+        }
+        
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .community-stat {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .community-stat h4 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .community-platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .platform-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: #2f3542;
+            color: white;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ff6b6b;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 30px;
+            color: #ff6b6b;
+        }
+        
+        .contact-form {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .social-links a:hover {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .tutorials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .creator-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                CAPIT STUDIO
+                <span>Creative • Awesome • Pro • Interactive • Tutorial</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#learn">Learn</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#contact" class="cta-nav">Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="subtitle">Creative Awesome Pro Interactive Tutorial</div>
+            <h1>CAPIT STUDIO</h1>
+            <p>Belajar editing CapCut yang lagi happening sambil having fun! ✨ Transform your ordinary footage jadi viral content yang bikin audience terpukau 🚀</p>
+            <div class="cta-buttons">
+                <a href="#learn" class="btn btn-primary">🎬 Start Your Journey</a>
+                <a href="#community" class="btn btn-secondary">🔥 Explore Trending Effects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="video-showcase">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">From Basic Footage to Viral Content</h2>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">Watch the magic happen in real-time!</p>
+            <div class="showcase-video">
+                🎥
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tutorials -->
+    <section id="learn" class="section featured">
+        <div class="container">
+            <h2 class="section-title">🔥 Hot Tutorials</h2>
+            <p class="section-subtitle">Tutorial yang lagi happening dan bikin content kalian instantly recognizable!</p>
+            
+            <div class="tutorials-grid">
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        ⚡
+                        <div class="tutorial-badge">TRENDING</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Viral Transition Magic</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 Intermediate</span>
+                            <span style="color: #666;">⏱️ 15 menit</span>
+                        </div>
+                        <p>5 jenis smooth transition yang paling sering dipakai content creator dan bikin viewers terpukau. Step-by-step breakdown dengan real examples!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Transition</span>
+                            <span class="tag">Viral</span>
+                            <span class="tag">TikTok</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        🎵
+                        <div class="tutorial-badge">HOT</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Beat Drop Editing</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 Advanced</span>
+                            <span style="color: #666;">⏱️ 20 menit</span>
+                        </div>
+                        <p>Cara sync video dengan musik yang on point dan teknik cutting yang bikin viewers ga bisa kedip. Audio visualization tips yang aesthetic!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Audio Sync</span>
+                            <span class="tag">Music</span>
+                            <span class="tag">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        🎨
+                        <div class="tutorial-badge">NEW</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Aesthetic Color Grading</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 Beginner</span>
+                            <span style="color: #666;">⏱️ 12 menit</span>
+                        </div>
+                        <p>Transform video biasa jadi cinematic vibes dengan color grading yang tepat. Tips psychology warna yang bikin mood video perfect!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Color</span>
+                            <span class="tag">Aesthetic</span>
+                            <span class="tag">Cinematic</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        💫
+                        <div class="tutorial-badge">POPULAR</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Text Animation Pro</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 Intermediate</span>
+                            <span style="color: #666;">⏱️ 18 menit</span>
+                        </div>
+                        <p>Typography animation yang eye-catching dan kinetic text techniques yang engaging. Color psychology dalam text design yang powerful!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Typography</span>
+                            <span class="tag">Animation</span>
+                            <span class="tag">Text</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        📱
+                        <div class="tutorial-badge">ESSENTIAL</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Platform Optimization</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 All Levels</span>
+                            <span style="color: #666;">⏱️ 25 menit</span>
+                        </div>
+                        <p>TikTok vs IG Reels vs YouTube Shorts. Aspect ratio, duration optimization, dan algorithm-friendly editing techniques yang work!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Platform</span>
+                            <span class="tag">Algorithm</span>
+                            <span class="tag">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card">
+                    <div class="tutorial-image">
+                        🚀
+                        <div class="tutorial-badge">MASTERCLASS</div>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>Storytelling Through Editing</h3>
+                        <div class="tutorial-meta">
+                            <span style="color: #ff6b6b; font-weight: 600;">🎯 Expert</span>
+                            <span style="color: #666;">⏱️ 30 menit</span>
+                        </div>
+                        <p>Visual narrative techniques dan emotional pacing dalam video editing. Creating viewer journey yang engaging dan memorable!</p>
+                        <div class="tutorial-tags">
+                            <span class="tag">Storytelling</span>
+                            <span class="tag">Narrative</span>
+                            <span class="tag">Expert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Categories -->
+    <section class="section learning-categories">
+        <div class="container">
+            <h2 class="section-title">📚 Learning Categories</h2>
+            <p class="section-subtitle">Structured learning path yang disesuaikan dengan journey content creation kalian!</p>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <span class="category-icon">⚡</span>
+                    <h3>Trending Effects Lab</h3>
+                    <p>Teknik editing yang lagi viral dan bikin content kalian instantly recognizable di media sosial</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Tutorials</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Views</div>
+                        </div>
+                    </div>
+                    <a href="#learn" class="btn btn-primary">Explore Now</a>
+                </div>
+                
+                <div class="category-card">
+                    <span class="category-icon">🎯</span>
+                    <h3>Creator's Toolkit</h3>
+                    <p>Everything you need buat level up your content creation game dengan tools dan teknik yang practical</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Tutorials</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">75K+</div>
+                            <div class="stat-label">Views</div>
+                        </div>
+                    </div>
+                    <a href="#learn" class="btn btn-primary">Start Learning</a>
+                </div>
+                
+                <div class="category-card">
+                    <span class="category-icon">🚀</span>
+                    <h3>Foundation to Expert</h3>
+                    <p>Structured learning path dari zero to hero dalam CapCut mastery dengan progressive difficulty</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">40+</div>
+                            <div class="stat-label">Tutorials</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100K+</div>
+                            <div class="stat-label">Views</div>
+                        </div>
+                    </div>
+                    <a href="#learn" class="btn btn-primary">Begin Journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Creator -->
+    <section id="about" class="section about-creator">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Meet Your Creative Guide</h2>
+            <div class="about-content">
+                <div class="creator-image">
+                    📸
+                </div>
+                <div class="about-text">
+                    <h3>Hafidz Nafi Maula</h3>
+                    <p>Halo creators! 👋 Gue Hafidz, mahasiswa Ilmu Komunikasi di UNTIRTA yang passionate banget sama dunia content creation. Journey gue di editing dimulai dari iseng-iseng bikin video buat tugas kuliah, eh lama-lama jadi ketagihan eksplor berbagai teknik editing yang ada.</p>
+                    <p>Yang bikin gue tergerak bikin CAPIT Studio adalah karena gue sering banget dapet pertanyaan dari temen-temen: <em>"Fidz, ini edit pake apa sih?"</em> atau <em>"Gimana caranya bikin transition kayak gini?"</em></p>
+                    <p>Gue percaya setiap orang punya creative potential yang luar biasa, cuma butuh guidance yang tepat buat unleash it! 🚀</p>
+                    <div class="skills">
+                        <span class="skill-tag">CapCut Master</span>
+                        <span class="skill-tag">Visual Storytelling</span>
+                        <span class="skill-tag">Trend Analysis</span>
+                        <span class="skill-tag">Social Media Strategy</span>
+                        <span class="skill-tag">Community Builder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section community">
+        <div class="container">
+            <div class="community-content">
+                <h2 class="section-title" style="color: white;">Join Our Creative Community! 🌟</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">CAPIT Studio bukan cuma platform belajar, tapi juga community dimana content creator bisa saling support dan grow together!</p>
+                
+                <div class="community-stats">
+                    <div class="community-stat">
+                        <h4>2000+</h4>
+                        <p>Active Learners</p>
+                    </div>
+                    <div class="community-stat">
+                        <h4>500+</h4>
+                        <p>Tutorials Created</p>
+                    </div>
+                    <div class="community-stat">
+                        <h4>95%</h4>
+                        <p>Success Rate</p>
+                    </div>
+                    <div class="community-stat">
+                        <h4>50+</h4>
+                        <p>Mentoring Sessions</p>
+                    </div>
+                </div>
+                
+                <div class="community-platforms">
+                    <div class="platform-card">
+                        <div class="platform-icon">🎮</div>
+                        <h4>Discord Community</h4>
+                        <p>Real-time discussion, weekly challenges, live Q&A sessions, dan sharing works in progress!</p>
+                        <p><strong>1,200+ active creators</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-icon">📱</div>
+                        <h4>WhatsApp Groups</h4>
+                        <p>Beginner & Advanced groups, project collaboration, daily tips, dan peer support!</p>
+                        <p><strong>Multiple specialized groups</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-icon">📷</div>
+                        <h4>Instagram Hub</h4>
+                        <p>Daily inspiration, behind-the-scenes content, live tutorials, dan community showcase!</p>
+                        <p><strong>@capitstudio.id</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Let's Connect & Create! 🚀</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Ready to Level Up Your Editing Game?</h3>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">Ada teknik editing tertentu yang pengen kalian pelajari? Atau maybe ada trend baru yang belum gue cover? Let's connect dan create something amazing together!</p>
+                    
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <div>
+                            <strong>Email</strong><br>
+                            hafidz.capitstudio@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📱</i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            +62 XXX-XXXX-XXXX
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>💼</i>
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                            linkedin.com/in/hafidznafimaula
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <strong>Location</strong><br>
+                            Serang, Banten, Indonesia
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 2rem; color: #ff6b6b;">Tutorial Request Form 📝</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="platform">Platform Focus</label>
+                            <select id="platform" name="platform" required>
+                                <option value="">Pilih Platform</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="instagram">Instagram Reels</option>
+                                <option value="youtube">YouTube Shorts</option>
+                                <option value="all">All Platforms</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="level">Skill Level</label>
+                            <select id="level" name="level" required>
+                                <option value="">Pilih Level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="request">Specific Tutorial Request</label>
+                            <textarea id="request" name="request" placeholder="Ceritain detail tentang teknik editing yang pengen kalian pelajari..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span class="btn-text">🚀 Submit Request</span>
+                            <span class="loading" style="display: none;"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" title="Email">📧</a>
+                <a href="#" title="Discord">🎮</a>
+                <a href="#" title="WhatsApp">📱</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="LinkedIn">💼</a>
+            </div>
+            <p>&copy; 2025 CAPIT Studio - Creative Awesome Pro Interactive Tutorial</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">Made with ❤️ by Hafidz Nafi Maula</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const loading = submitBtn.querySelector('.loading');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            loading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Reset button state
+                btnText.style.display = 'inline';
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+                
+                // Show success message
+                alert('🎉 Awesome! Tutorial request kalian udah diterima. Gue akan prioritize berdasarkan community demand. Stay tuned buat update selanjutnya!');
+                
+                // Reset form
+                this.reset();
+            }, 2000);
+        });
+
+        // Add some interactive animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all tutorial cards and category cards
+        document.querySelectorAll('.tutorial-card, .category-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Easter egg: Konami Code
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiPattern.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiPattern)) {
+                alert('🎉 Secret Easter Egg Found! Kalian dapet exclusive access ke advanced tutorial yang belum dirilis! Contact gue dengan kode "KONAMI" buat claim bonus nya!');
+                konamiCode = [];
+            }
+        });
+    </script>
+</body>
+</html>
